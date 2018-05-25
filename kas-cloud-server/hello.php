@@ -1,6 +1,7 @@
 <?php
 echo "hello <br>";
 echo "hello <br>";
+echo "test commit 2<br>";
 
 //include "auth.php"; $tokenAuth = $response->access_token;
 include "sqlconn.php";
@@ -30,7 +31,6 @@ $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
 
 
 //API: Retreive all locks FROM 'lock-265-4'
-
 
 //now input the lock into the tables
 // $sql_insert_lock = "INSERT INTO `locks` (`prim-index`, 'lockName','roomNo',`signal-int`, `date`, `gateway-id`) VALUES (NULL, "hi",NULL,NULL, NULL,NULL);";
