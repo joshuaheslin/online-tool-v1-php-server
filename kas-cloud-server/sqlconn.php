@@ -1,5 +1,5 @@
 <?php
-echo "/--------------SQL CONNECT---------------/ <br>";
+//echo "/--------------SQL CONNECT---------------/ <br>";
 
 $host = 'localhost';
 $user='user';
@@ -12,6 +12,6 @@ if (!$conn) {
    die('Could not connect: ' . mysqli_error());
 }
 else
-   echo 'Connected successfully';
+   //echo 'Connected successfully';
 
 ?>

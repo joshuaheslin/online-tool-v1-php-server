@@ -1,10 +1,7 @@
 <?php
 echo "hello <br>";
-echo "hello <br>";
-echo "test commit 2<br>";
-
-//include "auth.php"; $tokenAuth = $response->access_token;
-include "sqlconn.php";
+include "auth.php"; $tokenAuth = $response->access_token;
+//include "sqlconn.php";
 
 
 /*
@@ -21,7 +18,7 @@ please visit https://121.40.42.36/, accept the license, and then try again the A
 /*pass token to next calls*/
 
 
-$tokenAuth = "53f15e8e1fbf66e6e8c3ec2d7fb7c3d34416cb1d3f1fea0b"; //3hours
+//$tokenAuth = "c4011a117ce8d51d32a0bc0b55269dbd704705a4054a0a53"; //3hours
 $tokenRefresh = $response->refresh_token;
 
 
@@ -37,26 +34,141 @@ $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
 // $result = mysqli_query($conn, $sql_insert_lock);
 
 
-
 echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
 $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
-//$result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+$result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+echo "<br><br>------------Retrieve Gateway Status GW000028 ------------------ <br>";
+$urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000028/status';
+$result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+echo "<br><br>------------Retrieve Gateway Status GW000024 ------------------ <br>";
+$urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000024/status';
+$result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+//
+echo "<br><br>------------Retrieve Gateway Status GW000030 KAS ------------------ <br>";
+$urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000030/status';
+$result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
 
 echo "<br><br>---------------------Retrieve Admin key ------------------ <br>";
 $urlAdmin = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002006/adminKey';
 //$result3 = CallAPIWithToken("GET", $urlAdmin, $tokenAuth, false); echo $result3;
 
-echo "<br><br>---------------------Retrieve lock status ------------------ <br>";
-$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002006/status';
-//$device = "UL002058";
+
+echo "<br><br>---------------------Retrieve lock status FRONT ------------------ <br>";
+$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002923/status';
 
 $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
 
 $data = json_decode($result3);
 $info = $data->info;
 
-echo "<br>";
+echo "<br><br>---------------------Retrieve lock status GARAGE ------------------ <br>";
+$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002832/status';
+
+$result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+$data = json_decode($result3);
+$info = $data->info;
+
+echo "<br><br>---------------------Retrieve lock status G LIFT LEFT------------------ <br>";
+$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL003027/status';
+
+$result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+$data = json_decode($result3);
+$info = $data->info;
+
+echo "<br><br>---------------------Retrieve lock status G LIFT RIGHT ------------------ <br>";
+$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002912/status';
+
+$result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+$data = json_decode($result3);
+$info = $data->info;
+//
+// echo "<br><br>---------------------Retrieve lock status BIKE ------------------ <br>";
+// $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002770/status';
+//
+// $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+//
+// $data = json_decode($result3);
+// $info = $data->info;
+//
+// echo "<br><br>---------------------Retrieve lock status B1 LIFT LEFT ------------------ <br>";
+// $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL003081/status';
+//
+// $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+//
+// $data = json_decode($result3);
+// $info = $data->info;
+//
+// echo "<br><br>---------------------Retrieve lock status B1 LIFT RIGHT ------------------ <br>";
+// $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002914/status';
+//
+// $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+//
+// $data = json_decode($result3);
+// $info = $data->info;
+
+echo "<br><br>";
+echo "<br><br>";
+echo "<br><br>---------------------Retrieve lock status KAS READER TEST UL002870------------------ <br>";
+$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002870/status';
+
+$result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+$data = json_decode($result3);
+$info = $data->info;
+
+//$count = gatewayCount($info);
+
+
+// $d_scanned_at = $info[0]->d_scanned_at;
+// $signal_strength = $info[0]->a_devices[0]->int_signal_strength;
+// $gw_id = $info[0]->s_gw_id;
+// /*SQL INSERT*/
+// echo "<br>SQL-INSERT<br>";
+// $sql = "INSERT INTO `locks` (`prim-index`, `lockName`, `roomNo`, `signal-int`, `date`, `gateway-id`) VALUES (NULL, 'UL002912', 'GROUND LIFT RIGHT','$signal_strength','$d_scanned_at','$gw_id');";
+// $result = mysqli_query($conn, $sql);
+//
+//
+//
+//
+// $d_scanned_at = $info[1]->d_scanned_at;
+// $signal_strength = $info[1]->a_devices[0]->int_signal_strength;
+// $gw_id = $info[1]->s_gw_id;
+// /*SQL INSERT*/
+// echo "<br>SQL-INSERT<br>";
+// $sql = "INSERT INTO `locks` (`prim-index`, `lockName`, `roomNo`, `signal-int`, `date`, `gateway-id`) VALUES (NULL, 'UL002912', 'GROUND LIFT RIGHT','$signal_strength','$d_scanned_at','$gw_id');";
+// $result = mysqli_query($conn, $sql);
+
+
+
+//
+//
+//
+//
+// for ($i = 0; $i <= $count-1; $i++) {
+//
+//   $d_scanned_at = $info[$i]->d_scanned_at;
+//   $signal_strength = $info[$i]->a_devices[0]->int_signal_strength;
+//   $gw_id = $info[$i]->s_gw_id;
+//
+//   /*SQL INSERT*/
+//   echo "<br>SQL-INSERT<br>";
+//   $sql = "INSERT INTO `locks` (`prim-index`, `lockName`, `roomNo`, `signal-int`, `date`, `gateway-id`) VALUES (NULL, 'UL002912', 'GROUND LIFT RIGHT','$signal_strength','$d_scanned_at','$gw_id');";
+//
+//   $result = mysqli_query($conn, $sql);
+//   /*SQL INSERT*/
+// }
+
+
+
+
+
+echo "<br><br><br><br><br>";
 $count = gatewayCount($info);
 
 // $count is the number of gateway's attached to the lock,
@@ -93,97 +205,97 @@ for ($i = 0; $i <= $count-1; $i++) {
   }
   */
 
-  $sql = "SELECT `gateway-id` FROM `locks`";
-  $result = mysqli_query($conn, $sql);
-  if (mysqli_num_rows($result) > 0) {
-      // output data of each row
-      while($row = mysqli_fetch_assoc($result)) {
-
-          // if ($row["gateway-id"] == null)
-          // {
-          //   //INSERT it because nothing exists yet
-          //   echo "insert";
-          // }
-          //
-          // if ($row["gateway-id"] == $gw_id)
-          // {
-          //   //if finds gw_id same as id in table, UPDATE
-          //   //already exists, so UPDATE row then return;
-          //   echo "<br>SQL-UPDATE<br>";
-          //   // $result = mysqli_query($conn, $sql);
-          //   // if (mysqli_num_rows($result) > 0) {
-          //   //     // output data of each row
-          //   //     while($row = mysqli_fetch_assoc($result)) {
-          //   //         echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. "<br>";
-          //   //     }
-          //   // } else {
-          //   //     echo "0 results";
-          //   // }
-          //   return;
-          // } else {
-          //   //does not exist already, so INSERT new row;
-          //   //else INSERT with gw_id
-          //   /* NOW INSERT IT ----------*/
-          //   echo "<br>SQL-INSERT<br>";
-          //   $sql = "INSERT INTO `locks` (`prim-index`, `signal-int`, `date`, `gateway-id`) VALUES (NULL, '$signal_strength', '$d_scanned_at','$gw_id');";
-          //
-          //   $result = mysqli_query($conn, $sql);
-          //   // if (mysqli_num_rows($result) > 0) {
-          //   //     // output data of each row
-          //   //     while($row = mysqli_fetch_assoc($result)) {
-          //   //         echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. "<br>";
-          //   //     }
-          //   // } else {
-          //   //     echo "0 results";
-          //   // }
-          //   return;
-          // }
-
-          //echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. " gateway-id: " . $row["gateway-id"] . "<br>";
-      }
-  } else {
-      //echo "0 results";
-  }
-
+//   $sql = "SELECT `gateway-id` FROM `locks`";
+//   $result = mysqli_query($conn, $sql);
+//   if (mysqli_num_rows($result) > 0) {
+//       // output data of each row
+//       while($row = mysqli_fetch_assoc($result)) {
+//
+//           if ($row["gateway-id"] == null)
+//           {
+//             //INSERT it because nothing exists yet
+//             echo "insert";
+//           }
+//
+//           if ($row["gateway-id"] == $gw_id)
+//           {
+//             //if finds gw_id same as id in table, UPDATE
+//             //already exists, so UPDATE row then return;
+//             echo "<br>SQL-UPDATE<br>";
+//             // $result = mysqli_query($conn, $sql);
+//             // if (mysqli_num_rows($result) > 0) {
+//             //     // output data of each row
+//             //     while($row = mysqli_fetch_assoc($result)) {
+//             //         echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. "<br>";
+//             //     }
+//             // } else {
+//             //     echo "0 results";
+//             // }
+//             return;
+//           } else {
+//             //does not exist already, so INSERT new row;
+//             //else INSERT with gw_id
+//             /* NOW INSERT IT ----------*/
+//             echo "<br>SQL-INSERT<br>";
+//             $sql = "INSERT INTO `locks` (`prim-index`, `signal-int`, `date`, `gateway-id`) VALUES (NULL, '$signal_strength', '$d_scanned_at','$gw_id');";
+//
+//             $result = mysqli_query($conn, $sql);
+//             // if (mysqli_num_rows($result) > 0) {
+//             //     // output data of each row
+//             //     while($row = mysqli_fetch_assoc($result)) {
+//             //         echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. "<br>";
+//             //     }
+//             // } else {
+//             //     echo "0 results";
+//             // }
+//             return;
+//           }
+//
+//           //echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. " gateway-id: " . $row["gateway-id"] . "<br>";
+//       }
+//   } else {
+//       //echo "0 results";
+//   }
+//
 }
 
 
-/*----------ECHO SQL TABLE TO PAGE----------*/
-$sql = "SELECT * FROM `locks`";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    echo "<table border='4' class='stats' cellspacing='10'>
-
-        <tr>
-        <td class='hed' colspan='8'>LOCK STATUS TABLE</td>
-          </tr>
-        <tr>
-        <th>ID</th>
-        <th>LOCK NO</th>
-        <th>SIGNAL</th>
-        <th>DATE</th>
-        <th>GATEWAY-ID</th>
-
-        </tr>";
-
-    echo "<tr>";
-    while($row = mysqli_fetch_assoc($result)) {
-        //echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. " gateway-id: " . $row["gateway-id"] . "<br>";
-        echo "<tr>";
-              echo "<td>" . $row["prim-index"] . "</td>";
-              echo "<td>" . "lockNo" . "</td>";
-              echo "<td>" . $row["signal-int"] . "</td>";
-              echo "<td>" . $row["date"] . "</td>";
-              echo "<td>" . $row["gateway-id"] . "</td>";
-        echo "</tr>";
-    }
-    echo "</table>";
-} else {
-    echo "0 results";
-}
-
-mysqli_close($conn);
+// /*----------ECHO SQL TABLE TO PAGE----------*/
+// $sql = "SELECT * FROM `locks`";
+// $result = mysqli_query($conn, $sql);
+// if (mysqli_num_rows($result) > 0) {
+//     // output data of each row
+//     echo "<table border='4' class='stats' cellspacing='10'>
+//
+//         <tr>
+//         <td class='hed' colspan='8'>LOCK STATUS TABLE</td>
+//           </tr>
+//         <tr>
+//         <th>ID</th>
+//         <th>LOCK NO</th>
+//         <th>SIGNAL</th>
+//         <th>DATE</th>
+//         <th>GATEWAY-ID</th>
+//
+//         </tr>";
+//
+//     echo "<tr>";
+//     while($row = mysqli_fetch_assoc($result)) {
+//         //echo "id: " . $row["prim-index"]. " signal: " . $row["signal-int"]. " date: " . $row["date"]. " gateway-id: " . $row["gateway-id"] . "<br>";
+//         echo "<tr>";
+//               echo "<td>" . $row["prim-index"] . "</td>";
+//               echo "<td>" . "lockNo" . "</td>";
+//               echo "<td>" . $row["signal-int"] . "</td>";
+//               echo "<td>" . $row["date"] . "</td>";
+//               echo "<td>" . $row["gateway-id"] . "</td>";
+//         echo "</tr>";
+//     }
+//     echo "</table>";
+// } else {
+//     echo "0 results";
+// }
+//
+// mysqli_close($conn);
 
 
 

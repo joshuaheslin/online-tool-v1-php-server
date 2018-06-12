@@ -8,7 +8,7 @@ $url = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/accesstoken';
 
 $params = array(
     'password' => '445566',       //ENTER THE SERVER PASSWORD HERE
-    'device_mac' => '',     // OPTIONAL
+    'device_mac' => '',           // OPTIONAL
     'username' => 'kas-server'    //ENTER THE SERVER USERNAME HERE
 );
 
