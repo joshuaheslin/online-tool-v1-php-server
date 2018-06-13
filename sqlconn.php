@@ -1,9 +1,9 @@
 <?php
-//echo "/--------------SQL CONNECT---------------/ <br>";
+echo "/--------------SQL CONNECT---------------/ <br>";
 
-$host = 'localhost';
-$user='user';
-$pass='';
+$host = 'http://35.189.47.93/';
+$user='root';
+$pass='kas123';
 $db='mydb';
 
 $conn = mysqli_connect($host, $user, $pass, $db);
@@ -12,6 +12,6 @@ if (!$conn) {
    die('Could not connect: ' . mysqli_error());
 }
 else
-   //echo 'Connected successfully';
+   echo 'Connected successfully';
 
 ?>
