@@ -2,7 +2,7 @@
 echo "hello <br>";
 include "auth.php"; $tokenAuth = $response->access_token;
 //include "sqlconn.php";
-
+echo 'hello22';
 
 /*
 And, www.ufunnetwork.com is a test server.
@@ -46,9 +46,19 @@ echo "<br><br>------------Retrieve Gateway Status GW000024 ------------------ <b
 $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000024/status';
 $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 //
-echo "<br><br>------------Retrieve Gateway Status GW000030 KAS ------------------ <br>";
-$urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000030/status';
+echo "<br><br>------------Retrieve Gateway Status GW000026 KAS ------------------ <br>";
+$urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000026/status';
 $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+echo '<br><br><br><br><br>------------Retrieve lock status UL002333 V11.1 test ------------------<br><br>';
+$urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002333/status';
+
+$result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+$data = json_decode($result3);
+$info = $data->info;
+
+echo '<br><br><br><br>';
 
 
 echo "<br><br>---------------------Retrieve Admin key ------------------ <br>";
