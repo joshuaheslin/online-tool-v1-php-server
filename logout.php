@@ -5,6 +5,6 @@
    session_start();
 
    if(session_destroy()) {
-      header("Location: login-main.php");
+      header("Location: login.php");
    }
 ?>
