@@ -1,17 +1,26 @@
 <?php
-echo "/--------------SQL CONNECT---------------/ <br>";
+//echo "/--------------SQL CONNECT---------------/ <br>";
 
-$host = 'http://35.189.47.93/'; //localhost
-$user='root'; //user
-$pass='jDHWjnFwcpbN2r';  // 'empty'
-$db='mydb';
+//$host = 'localhost';
+//$user='kas';
+//$pass='kas123';
+//$db='mydb';
 
-$conn = mysqli_connect($host, $user, $pass, $db);
+
 //$c = mysqli_connect();
-if (!$conn) {
-   die('Could not connect: ' . mysqli_error());
+
+
+
+function  connect($host,$user,$pass,$db){
+
+    $conn = mysqli_connect($host, $user, $pass, $db);
+    if (!$conn) {
+        die('Could not connect: ' . mysqli_error());
+        print_r(mysqli_error());
+    }
+    else
+        //echo 'Connected successfully';
+        return $conn;
 }
-else
-   echo 'Connected successfully';
 
 ?>

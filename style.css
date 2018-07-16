@@ -1,0 +1,347 @@
+/*jh*/
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Add a color to the active/current link */
+.topnav h1 {
+    color: white;
+    padding-left: 30pt;
+}
+
+/* button {
+  background-color: #003369;
+  color: #f2f2f2
+} */
+
+/*jh end*/
+
+
+
+body {
+font-family:arial;
+}
+
+div#container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#header {
+padding:1px;
+text-align:left;
+width:900px;
+margin:0 auto;
+margin-top:5px;
+}
+
+div#navbar {
+padding:1px;
+text-align:center;
+width:900px;
+margin:0 auto;
+margin-top:3px;
+}
+
+div#navbarcss  ul {
+list-style-type:none; margin:0; padding:0; overflow:hidden;
+}
+
+div#navbarcss  ul li {
+float:left;
+}
+
+div#navbarcss  ul li a:link,a:visited {
+display:block; width:219px; font-weight:bold; font-size:12px;
+color:#383838; background-color:#E0E0E0; text-align:center; padding:3px;
+text-decoration:none; text-transform:uppercase;
+}
+
+div#navbarcss ul li a:hover,a:active {
+background-color:#00CC33;
+}
+
+div#topfive {
+float:left;width:700px;
+margin-top:5px;
+}
+
+div#topfive {
+text-align:center;
+}
+
+div#loginbox {
+background-color:#E0E0E0;
+float:right;width:190px;
+margin-top:5px;
+margin-left:5px;
+}
+
+#form_container{
+text-align:left;
+width:900px;
+margin:0 auto;
+padding:0;
+font-family:arial;
+font-size:15px;
+}
+
+#form_content{
+float:right;
+width:650px;
+padding-right:120px;
+}
+
+div#form_container h3{
+color:red;
+text-decoration:underline;
+padding-top:10px;
+}
+
+div#form_container input {
+width:200px;
+margin-bottom:5px;
+}
+
+#registration_form .label {
+float: left;
+width: 140px;
+}
+
+#booking_form .label {
+float: left;
+width: 300px;
+}
+
+div#form_container textarea{
+width:200px;
+}
+
+#registration_form .error {
+color: red;
+font-size:12px;
+margin-left: 140px;
+display:none;
+}
+
+#registration_submit{
+margin-left: 140px;
+}
+
+#edit_submit {
+
+    float:inherit;
+
+}
+
+#login_submit {
+margin-left: 5px;
+}
+
+#close_registration {
+margin-left:140px;
+}
+
+#loginbox textarea{
+width:180px;
+margin-left:5px;
+}
+
+#loginbox input {
+width:170px;
+margin-left:5px;
+margin-bottom:5px;
+}
+
+#user_reg_submit {
+margin-left: 5px;
+}
+
+#login_message {
+margin-left: 5px;
+}
+
+div#back_button a img{
+outline:none;
+border:none;
+}
+
+div#footer {
+position:fixed;
+bottom:0px;
+}
+
+div#footer  ul {
+list-style-type:none; margin-left:200px; padding:0; overflow:hidden;
+}
+
+div#footer  ul li {
+float:left;
+}
+
+div#footer  ul li a:link,a:visited {
+width:300px; font-size:12px;
+color:#383838; text-align:center; padding:22px;
+text-decoration:none;
+}
+
+div#footer p {
+position: fixed;
+bottom: 0px;
+}
+
+div#footer ul li a:hover,a:active {
+background-color:#00CC33;
+}
+
+div#pol_container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#about_container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#product_cat__container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#product_review_container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#prod_review_text p{
+text-align:left;
+width:600px;
+margin:0 auto;
+}
+
+div#service_cat_container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#service_review_container {
+text-align:left;
+width:900px;
+margin:0 auto;
+}
+
+div#welcome_text {
+text-align:center;
+}
+
+div#about_text {
+text-align:left;
+margin-left:190px;
+}
+
+div#policy_text {
+text-align:left;
+margin-left:190px;
+}
+
+div#prod_cat_links {
+padding:1px;
+text-align:center;
+width:900px;
+margin:0 auto;
+margin-top:3px;
+margin-left:330px;
+}
+
+div#prod_cat_links  ul {
+list-style-type:none; margin:0; padding:0; overflow:hidden;
+width:220px;
+}
+
+div#prod_cat_links  ul li {
+float:left;
+}
+
+div#prod_cat_links  ul li a:link,a:visited {
+display:block; width:219px; font-weight:bold; font-size:12px;
+color:#383838; background-color:#E0E0E0; text-align:center; padding:3px;
+text-decoration:none; text-transform:uppercase;
+}
+
+div#prod_cat_links ul li a:hover,a:active {
+background-color:#00CC33;
+}
+
+div#serv_cat_links {
+padding:1px;
+text-align:center;
+width:900px;
+margin:0 auto;
+margin-top:3px;
+margin-left:330px;
+}
+
+div#serv_cat_links  ul {
+list-style-type:none; margin:0; padding:0; overflow:hidden;
+}
+
+div#serv_cat_links  ul li {
+float:left;
+}
+
+div#serv_cat_links  ul li a:link,a:visited {
+display:block; width:219px; font-weight:bold; font-size:12px;
+color:#383838; background-color:#E0E0E0; text-align:center; padding:3px;
+text-decoration:none; text-transform:uppercase;
+}
+
+div#serv_cat_links ul li a:hover,a:active {
+background-color:#00CC33;
+}
+
+div#prod_review_box {
+margin-left:60px;
+}
+
+div#serv_review_box {
+margin-left:60px;
+}
+
+div#css p{
+    margin-left:20px;
+}
+
+div#loginbox p  {
+    margin-left: 5px;
+}

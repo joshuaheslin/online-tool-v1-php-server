@@ -14,6 +14,6 @@
    $login_session = $row['appaccount'];
 
    if(!isset($_SESSION['login_user'])){
-      header("location:login.php");
+      header("location:login-main.php");
    }
 ?>
