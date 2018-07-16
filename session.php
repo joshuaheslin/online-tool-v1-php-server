@@ -2,7 +2,7 @@
   /*
   Session.php will verify the session, if there is no session it will redirect to login page.
   */
-   include('sqlconn.php');
+   //include('sqlconn.php');
    session_start();
 
    $user_check = $_SESSION['login_user'];
@@ -15,5 +15,6 @@
 
    if(!isset($_SESSION['login_user'])){
       header("location:login.php");
+      exit(); // <-- terminates the current script
    }
 ?>
