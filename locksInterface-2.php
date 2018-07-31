@@ -3,36 +3,46 @@ function echoHello(){
  alert("<?PHP foo(); ?>");
 }
 
- function update_all_names(){
-   alert("Attemping to update all sql row in table");
+ // function update_all_names(){
+ //   alert("Attemping to update all sql row in table");
+ //
+ //   var inputs, input, nameText, i;
+ //
+ //   var names = [];
+ //
+ //  inputs = document.getElementsByTagName('input');
+ //  for (i=0; i<inputs.length; i++) {
+ //     input = inputs[i];
+ //     if (input.name == "doortext") {
+ //         nameText = input.value;
+ //         names.push(nameText);
+ //         alert(nameText);
+ //     }
+ //  }
+ //  alert(names);
+ //
+ //  $.ajax({
+ //      url:'update_all_row_name.php',
+ //      type:'post',
+ //      data:names,
+ //      success: function(response) {
+ //          alert(response);
+ //      }
+ //  });
+ //
+ //
+ // }
 
-   var inputs, input, nameText, i;
-
-   var names = [];
-
-  inputs = document.getElementsByTagName('input');
-  for (i=0; i<inputs.length; i++) {
-     input = inputs[i];
-     if (input.name == "doortext") {
-         nameText = input.value;
-         names.push(nameText);
-         alert(nameText);
-     }
-  }
-  alert(names);
-
-  $.ajax({
-      url:'update_all_row_name.php',
-      type:'post',
-      data:names,
-      success: function(response) {
-          alert(response);
-      }
-  });
-
-
- }
 </script>
+
+<!-- <script>
+ $(document).ready(function(){
+   alert("doc loaded");
+
+
+
+ });
+</script> -->
 
 <script>
  $(document).ready(function(){
@@ -40,10 +50,10 @@ function echoHello(){
        $("button").click(function(){
          //alert("button click");
 
-         if (this.name == 'button_row') {
+         if (this.name == 'button_row_save') {
 
            var id = this.id;
-           //alert(id);
+           alert(id);
 
            var inputText;
            input = document.getElementById('input_' + this.id);
@@ -72,12 +82,17 @@ function echoHello(){
 
 </script>
 
+<script>
+$(document).ready(function() {
+  //alert("doc loaded");
+    $('[name="row_spinner"]').hide();
+});
+</script>
 
 <?php
 
 include "SQL_interface.php";
 include "functions.php";
-
 
 $tokenAuth = TokenAuth(); //3hours
 
@@ -99,30 +114,34 @@ $lockData = $dataLocks->info;
 $sqlInterface = new SQLInteface($lockData, $tokenAuth, $app_account);
 
 
-//$sqlInterface->updateLockDataToSQL();
+$sqlInterface->updateLockDataToSQL();
 
 $locks = $sqlInterface->getLockData($app_account);
 
-echo "<h2>Lock Details</h2>";
+//echo "loading... locksInterface-2.php";
 
-echo "<table class=" . "table table-bordered" . " id=" . "myTable2" . ">";
+echo "<table class='table table-responsive table-sm' id='myTable2'>";
 echo "<thead>";
+
 echo "<tr>";
 
 //foreach ($infoLocks as $value){
    // $s_LockName = (string)$value-> s_lock_name;
     echo "<th onclick='sortTable(0)'>Door Name        <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(1)'>ID               <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(2)'>Number           <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(3)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(4)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(5)'>GW1 Name         <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(6)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(7)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(8)'>GW2 Name         <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(9)'>Status           <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick=''>                                                             </th>";
+    echo "<th onclick='sortTable(2)'>ID               <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(3)'>Number           <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(4)'>Status           <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(5)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(6)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(7)'>GW1 Name         <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(8)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(9)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(10)'>GW2 Name         <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick=''>Remote Unlock</th>";
+    echo "<th onclick=''>Pin Code List</th>";
     echo "<th onclick=''></th>";
-    echo "<th onclick=''></th>";
+
    // echo "<button type=". "button" . "class=" . "btn" . ">Basic</button>";
 
 //}
@@ -132,58 +151,69 @@ echo "</thead>";
 
 echo "<tbody>";
 
-
 echo "</tbody>";
 
-$count = 0;
 foreach ($locks as $value){
     $s_LockNumber = $value->name;
     $s_LocalDoorName = $value->local_door_name;
     $s_LockID = $value->room_number;
+
+    //GW1
     $s_GW1_LockSignalStrength = $value->gateway_1_signal;
     $s_GW1_LockLastScanned = $value->gateway_1_date;
     $s_GW1_LockGWName = $value->gateway_1_id;
-
-    echo "<tr>";
-    //$result = $_GET['image'];
-    echo "<td><input id='input_$s_LockNumber' type='text' name='doortext' placeholder='i.e Front Door' value='$s_LocalDoorName'></td>";
-    echo "<td>" . $s_LockID . "</td>";
-    echo "<td>" . $s_LockNumber . "</td>";
-    echo "<td>" . $s_GW1_LockSignalStrength . "</td>";
-    echo "<td>" . $s_GW1_LockLastScanned . "</td>";
-    echo "<td>" . $s_GW1_LockGWName . "</td>";
 
     //GW2
     $s_GW2_LockSignalStrength = $value->gateway_2_signal;
     $s_GW2_LockLastScanned = $value->gateway_2_date;
     $s_GW2_LockGWName = $value->gateway_2_id;
 
+    echo "<tr>";
+    //$result = $_GET['image'];
+    echo "<td><input id='input_$s_LockNumber' type='text' name='doortext' placeholder='i.e Front Door' value='$s_LocalDoorName'></td>";
+    echo "<td><button class='btn btn-default btn-sm' id=".$s_LockNumber." name='button_row_save'>Save</button></td>";
+    echo "<td>" . $s_LockID . "</td>";
+    echo "<td>" . $s_LockNumber . "</td>";
+
+    echo "<td><img src='" . determine_lock_status_colour($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned) . ".png' height='22' width='22'></td>";
+
+    echo "<td>" . $s_GW1_LockSignalStrength . "</td>";
+    echo "<td>" . $s_GW1_LockLastScanned . "</td>";
+    echo "<td>" . $s_GW1_LockGWName . "</td>";
+
     echo "<td>" . $s_GW2_LockSignalStrength . "</td>";
     echo "<td>" . $s_GW2_LockLastScanned . "</td>";
     echo "<td>" . $s_GW2_LockGWName . "</td>";
 
-    echo "<td><img src='" . determine_lock_status_colour($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned) . ".png' height='22' width='22'></td>";
-    echo "<td><button id=".$s_LockNumber." name='button_row'>Save</button></td>"; //<a href ='update_row_name.php?lock_number=" . $s_LockNumber . "&name=" . "doortest11" . "'>Save</a></td>";
-    echo "<td><button id='unlock_".$s_LockNumber."' name='button_row' ".determine_remote_unlock_disabled().">Unlock</button></td>"; //<a href ='update_row_name.php?lock_number=" . $s_LockNumber . "&name=" . "doortest11" . "'>Save</a></td>";
-    echo "</tr>";
+    echo "<td><button class='btn btn-primary btn-sm' onclick='remote_unlock($s_LockNumber)' id='unlock_".$s_LockNumber."' name='button_row_unlock' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Unlock</button></td>";
+
+    //echo "<form method='post' action='pincodes.php'";
+    echo "<td><a href='pincodes.php?factory_name=$s_LockNumber&room_id=$s_LockID&door_name=$s_LocalDoorName'><button onclick='showSpinnerForRow($s_LockNumber)' class='btn btn-success btn-sm'  id='pincodes_".$s_LockNumber."' name='button_row_pincodes' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Manage</button></a></td>";
+    //echo "";
+
+    // $_SESSION['factory_name'] = $s_lockNumber;
+    echo "<td><div class='loader' id='spinner_".$s_LockNumber."' name='row_spinner' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned)."></div></td>";
 
 }
 
 echo "</table>";
+// echo "hi";
 
+echo "<button class='btn-default' hidden>hello</button>";
 
-function determine_remote_unlock_disabled(){
-  $status = determine_lock_status_colour($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned);
-  if ($status == "red") {
-    return "disabled";
+function is_button_hidden($gw1signal,$gw1date,$gw2signal,$gw2date){
+
+  //return "";
+
+  if ($gw1signal == 0 && $gw2signal == 0){
+    return "hidden";
   } else {
     return "";
   }
 }
 
 function determine_lock_status_colour($gw1signal,$gw1date,$gw2signal,$gw2date){
-
-  if ($gw1signal == 0 && $gw2signal ==0){
+  if ($gw1signal == 0 && $gw2signal == 0){
     return "red";
   } else {
     return "green";
@@ -230,6 +260,56 @@ function foo(){
 // }
 
 ?>
+
+<script>
+
+function showSpinnerForRow(id){
+  //lert("show spinner");
+
+  $("button").click(function() {
+    var id = this.id;
+    var res = id.split("_");
+    var factory_name = res[1];
+    //alert(factory_name);
+    var spinner_id = '#spinner_'+factory_name;
+    //alert(spinner_id);
+
+    $(spinner_id).show();
+
+  });
+
+  //showing all spinners
+  //$('[name="row_spinner"]').show();
+
+}
+
+function remote_unlock(id) {
+
+  //alert(id);
+  //alert("Attempting to unlock");
+
+  $("button").click(function(){
+       var id = this.id;
+       var res = id.split("_");
+       var factory_name = res[1];
+
+       alert("Attempting to unlock " + factory_name);
+
+       var spinner_id = '#spinner_'+factory_name;
+       //alert(spinner_id);
+
+       $(spinner_id).show();
+
+       //showSpinnerForRow(id);
+
+       //alert(factory_name);
+       //why does this function repeat if clicked more than once for each page load?
+  });
+
+}
+
+</script>
+
 
 <script>
 

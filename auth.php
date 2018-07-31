@@ -7,9 +7,9 @@ $url = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/accesstoken';
 //'https://121.40.42.36/ilocks/api/apps/v1/servers/accesstoken';
 
 $params = array(
-    'password' => '445566',       //ENTER THE SERVER PASSWORD HERE
-    'device_mac' => '',           // OPTIONAL
-    'username' => 'kas-server'    //ENTER THE SERVER USERNAME HERE
+    'password' => '445566',       //ENTER THE SERVER PASSWORD HERE 445566
+    'device_mac' => '123443423413241',           
+    'username' => 'kas-server'    //ENTER THE SERVER USERNAME HERE kas-server
 );
 
 $responseJson = CallAPIAuth("POST", $url, $params);

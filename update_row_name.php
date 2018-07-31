@@ -1,6 +1,6 @@
 <?PHP
 include("sqlconn.php");
-$conn = connect('localhost','user','','mydb');
+$conn = connect('localhost','root','jDHWjnFwcpbN2r','mydb');
 
 //sanitize Variables
 $lockName = mysqli_real_escape_string($conn, $_POST['lock_name']);

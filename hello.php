@@ -16,12 +16,137 @@ And, www.ufunnetwork.com is a test server.
 please visit https://121.40.42.36/, accept the license, and then try again the API.
 */
 
+
+
+//---------------------------- PLAYGROUND HERE --------------------------//
+
+
+echo "<br><br>============================DEMO TESTING==========================<br>";
+
+
+  // echo "<br><br>------------Create User Account ------------------ <br>";
+  // $url = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
+  // $params = array(
+  //     'user_name' => 'test-100',
+  //     'user_password' => '123456'
+  // );
+  // $responseJson = CallAPICreateUser("POST", $url, $tokenAuth, $params);
+  // echo $responseJson;
+
+  // $response = json_decode($responseJson);
+  // echo "<br>-- <br>response: ";
+  // echo $response->ack;
+  // echo "<br>refresh_token: ";
+  // echo $response->refresh_token;
+  // echo "<br><br><br>";
+
+
+
+
+  echo "<br><br>------------Retrieve All User Account ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
+  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+
+  echo "<br><br>------------Retrieve Gateway Status GW000006 ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000006/status';
+  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+
+  echo "<br><br>---------------------Retrieve lock status UL002063 ------------------ <br>";
+  $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002063/status';
+
+  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+  $data = json_decode($result3);
+  $info = $data->info;
+
+
+  echo "<br><br>---------------------Remote unlock ------------------ <br>";
+  $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002063/remoteUnlock';
+
+  $result3 = CallAPIWithToken("PUT", $urlStatus, $tokenAuth, false); echo $result3;
+
+  $data = json_decode($result3);
+  $instruction_id = $data->info->s_instruction_id;
+  echo "<br>instruction id: ";
+  echo $instruction_id;
+
+
+  echo "<br><br>---------------------Retrieve instruction status ------------------ <br>";
+  $urlStatus = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/instruction?instruction_id=$instruction_id";
+  echo $urlStatus;
+  echo "<br>";
+
+  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, true); echo $result3;
+
+  $data = json_decode($result3);
+  $info = $data->info;
+
+
+
+
+
+  echo "<br><br>---------------------Retrieve ALL locks  ------------------ <br>";
+  $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks";
+  $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
+
+
+
+  // echo "<br><br>------------Retrieve Gateway Status GWS00014 ------------------ <br>";
+  // $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GWS00014/status';
+  // $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+  //
+  // $subAccount = "lock-264-7";
+  //
+  // echo "<br><br>---------------------Retrieve all locks FROM . $subAccount . ------------------ <br>";
+  // $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/" . $subAccount . "/locks";
+  // $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
+
+
+  // echo "<br><br>---------------------Retrieve lock status BLE ACR 001 UL002870 ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002870/status';
+  //
+  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $info = $data->info;
+  //
+  // echo "<br><br>---------------------Retrieve lock status 0101 ONYX UL002333 ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002333/status';
+  //
+  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $info = $data->info;
+  //
+  // echo "<br><br>---------------------Retrieve lock status 0102 Platinum UL002077 ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002077/status';
+  //
+  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $info = $data->info;
+
+  // echo "<br><br>---------------------Retrieve lock status 0103 SUB1-PLAT SS000009 ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/SS000009/status';
+  //
+  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $info = $data->info;
+
+
+
+
+
+
 /*
 -------------------------------------------------------------------------------
 ------------------------------SELECT SITE START--------------------------------
 -------------------------------------------------------------------------------
 */
-$atira_id = 3;  //0 = none, 1 = WAYMOUTH, 2 = GLEN ROAD, 3 = Demo Testing
+$atira_id = 4;  //0 = none, 1 = WAYMOUTH, 2 = GLEN ROAD, 3 = Demo Testing
 
 
 if ($atira_id == 1 ){
@@ -193,7 +318,7 @@ if ($atira_id == 1 ){
   $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
 
 
-  echo "<br><br>---------------------Retrieve lock status FRONT ------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status FRONT UL002923------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002923/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -201,7 +326,7 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve lock status GARAGE ------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status GARAGE UL002832------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002832/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -209,7 +334,7 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve lock status G LIFT LEFT------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status G LIFT LEFT UL003027------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL003027/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -217,7 +342,7 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve lock status G LIFT RIGHT ------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status G LIFT RIGHT UL002912------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002912/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -225,7 +350,7 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve lock status BIKE ------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status BIKE UL002770------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002770/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -233,7 +358,7 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve lock status B1 LIFT LEFT ------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status B1 LIFT LEFT UL003081------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL003081/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -241,7 +366,7 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve lock status B1 LIFT RIGHT ------------------ <br>";
+  echo "<br><br>---------------------Retrieve lock status B1 LIFT RIGHT UL002914------------------ <br>";
   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002914/status';
 
   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
@@ -249,9 +374,9 @@ if ($atira_id == 1 ){
   $data = json_decode($result3);
   $info = $data->info;
 
-  echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
-  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
-  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+  // echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
+  // $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
+  // $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
   echo "<br><br>------------Retrieve Gateway Status GW000028 DESK/FRONT/LIFT ------------------ <br>";
   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000028/status';
@@ -262,9 +387,16 @@ if ($atira_id == 1 ){
   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
 
-} else if ($atira_id = 3) {
+} else if ($atira_id == 3) {
 
   echo "<br><br>============================DEMO TESTING==========================<br>";
+
+
+  echo "<br><br>------------Retrieve All User Account ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
+  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+
 
   echo "<br><br>------------Retrieve Gateway Status GW000006 ------------------ <br>";
   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000006/status';
@@ -318,7 +450,6 @@ if ($atira_id == 1 ){
 
 }
 
-//---------------------------- PLAYGROUND HERE --------------------------//
 
 
 //API: Retreive all locks FROM 'lock-265-4'
@@ -571,7 +702,7 @@ function CallAPIWithToken($method, $url, $token, $data = false)
             curl_setopt($curl, CURLOPT_POST, 1);
 
             if ($data)
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+                curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
             break;
         case "PUT":
             curl_setopt($curl, CURLOPT_PUT, 1);
@@ -610,8 +741,11 @@ function CallAPIWithTokenWithData($method, $url, $token, $data)
         case "POST":
             curl_setopt($curl, CURLOPT_POST, 1);
 
-            if ($data)
-                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            if ($data) {
+              echo "data exists";
+              echo json_encode($data);
+              curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            }
             break;
         case "PUT":
             curl_setopt($curl, CURLOPT_PUT, 1);
@@ -628,6 +762,45 @@ function CallAPIWithTokenWithData($method, $url, $token, $data)
 
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    //enter token from authentication API call
+    $authorization = "Authorization: Bearer " . $token;
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json", $authorization));
+    curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 60);
+    curl_setopt($curl, CURLOPT_TIMEOUT, 60);
+
+    $result = curl_exec($curl);
+
+    curl_close($curl);
+
+    return $result;
+}
+
+function CallAPICreateUser($method, $url, $token, $data = false)
+{
+    $curl = curl_init();
+
+    switch ($method)
+    {
+        case "POST":
+            curl_setopt($curl, CURLOPT_POST, 1);
+
+            if ($data)
+                curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data)); /*json_encode is the only difference for CallAPICreateUser & CallAPIWithToken*/
+            break;
+        case "PUT":
+            curl_setopt($curl, CURLOPT_PUT, 1);
+            break;
+        default:
+            if ($data)
+                $url = sprintf("%s?%s", $url, http_build_query($data));
+    }
+
+    // // Optional Authentication:
+    // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    // curl_setopt($curl, CURLOPT_USERPWD, "testserver:123456");
+
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true); //false //CURLOPT_RETURNTRANSFER tells PHP to store the response in a variable instead of printing it to the page, so $response will contain your response. Here's your most basic working code (I think, didn't test it):
     //enter token from authentication API call
     $authorization = "Authorization: Bearer " . $token;
     curl_setopt($curl, CURLOPT_HTTPHEADER, array("Content-Type: application/json", $authorization));

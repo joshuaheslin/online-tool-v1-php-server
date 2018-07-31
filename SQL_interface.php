@@ -199,6 +199,25 @@ class SQLInteface {
 
     }
 
+    public function lock_is_in_SQL($lockName){
+
+      $sql = "SELECT * FROM `lockstatus` WHERE lock_name='$lockName'";
+      $result = $this->conn->query($sql);
+
+      if ($result->num_rows == 1){ //match found!
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+
+    public function deleteLockFromSQL($lockName){
+
+      echo "will delete lock $lockName.";
+
+    }
+
     public function updateLockDataToSQL(){
 
         $this->tokenAuth = TokenAuth();
@@ -208,7 +227,16 @@ class SQLInteface {
             $s_lock_name = $value->s_lock_name;
             $s_room_name = $value->s_room_name;
 
-            $this->updateLockToSQL($s_lock_name, $s_room_name);
+            //TODO
+            if ($this->lock_is_in_SQL($s_lock_name)){
+
+                $this->updateLockToSQL($s_lock_name, $s_room_name);
+
+            } else {
+
+              $this->deleteLockFromSQL($s_lock_name);
+
+            }
 
         }
 

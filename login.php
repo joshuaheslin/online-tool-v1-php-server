@@ -43,42 +43,68 @@
   <title>KAS Online Tool</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="style.css">
 </head>
+
+<script>
+$(document).ready(function() {
+  //alert("doc loaded");
+    $('#spinner').hide();
+});
+</script>
+
 <body>
 
-<div class="topnav">
-  <h1>KAS Online Tool</h1>
+<div class="navbar" role="navigation">
+
+  <span>KAS Online Tool</span>
+
 </div>
 
 <div class="container">
   <!-- <h1>KAS Online Tool</h1> -->
+  <br>
+  <div class="col-md-6">
+    <div class="jumbotron">
+      <!-- <h1 class="display-4">Login</h1> -->
+      <p class="lead">Log in to KAS Online Tool</p>
+      <hr class="my-4">
 
-  <h3>Login</h3>
+      <form method="post" action="">
+          <div class="col-md-6">
+            <input class="form-control" type="text" name="name" id="name" value="" placeholder="APP Account" required/>
+            <br>
+            <input class="form-control" type="password" name="password" id="password" value="" placeholder="Password" required/>
+          </div>
+          <br>
+          <p>Please note: Login may take some time. After login, all lock data will be loaded.</p>
+          <input class="btn btn-primary btn-md" type="submit" value="Log in" onclick="showSpinner()"/>
+      </form>
+      <br>
+      <div class="loader" id="spinner"></div>
 
-  <form method="post" action="">
-    <div class="row uniform">
-      <div class="6u 12u$(xsmall)">
-        <input type="text" name="name" id="name" value="" placeholder="APP Account" required/>
-      </div>
-      <br>
-      <div class="6u$ 12u$(xsmall)">
-        <input type="password" name="password" id="password" value="" placeholder="Password" required/>
-      </div>
-      <br>
-      <div class="12u$">
-          <input type="submit" value="Log in" />
-      </div>
-      <p>Please note: Login may take some time</p>
+      <!-- <p class="lead">
+        <a class="btn btn-primary btn-md" href="#" role="button">Learn more</a>
+      </p> -->
     </div>
-  </form>
+  </div>
+
   <!-- <a href="main.php">Go to main</a> -->
 
 
 </div>
+
+
+<script>
+function showSpinner(){
+  //alert("clicked");
+  $('#spinner').show();
+}
+</script>
 
 </body>
 </html>
