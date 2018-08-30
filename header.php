@@ -30,6 +30,7 @@ $timezone_login = $_SESSION['timezone'];
   <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 </head>
+
 <body>
 
 
@@ -42,7 +43,6 @@ $timezone_login = $_SESSION['timezone'];
     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Account
     </button>
-
     <div class="dropdown-menu dropdown-menu-right">
       <h6 class="dropdown-header">App Account: <?php echo $app_account;?></h6>
       <h6 class="dropdown-header">Property Name: <?php echo $_SESSION['property_name'];?></h6>
@@ -50,9 +50,39 @@ $timezone_login = $_SESSION['timezone'];
     </div>
 
   </div>
-
-
 </div>
+
+<nav class="navbar navbar-dark bg-light">
+  <!-- Navbar content -->
+
+  <!-- <a class="navbar-brand">Navbar</a> -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav inline">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
+
+</nav>
 
 
 <div class="my-table-layout">

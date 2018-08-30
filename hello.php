@@ -43,65 +43,78 @@ echo "<br><br>============================DEMO TESTING==========================
 
 
 
+  // echo "<br><br>------------Retrieve All User Account ------------------ <br>";
+  // $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
+  // $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+
+  // echo "<br><br>------------Retrieve Gateway Status GW000006 ------------------ <br>";
+  // $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000006/status';
+  // $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+  //
+  //
+  // echo "<br><br>---------------------Retrieve lock status UL002063 ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002063/status';
+  //
+  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $info = $data->info;
+  //
+  //
+  // echo "<br><br>---------------------Remote unlock ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002063/remoteUnlock';
+  //
+  // $result3 = CallAPIWithToken("PUT", $urlStatus, $tokenAuth, false); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $instruction_id = $data->info->s_instruction_id;
+  // echo "<br>instruction id: ";
+  // echo $instruction_id;
+  //
+  //
+  // echo "<br><br>---------------------Retrieve instruction status ------------------ <br>";
+  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/instruction?instruction_id='.$instruction_id;
+  // echo $urlStatus;
+  // echo "<br>";
+  //
+  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, true); echo $result3;
+  //
+  // $data = json_decode($result3);
+  // $info = $data->info;
+
+
+
+
+
+  // echo "<br><br>---------------------Retrieve ALL locks  ------------------ <br>";
+  // $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks";
+  // $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
+
+
+
+  echo "<br><br>------------Retrieve Gateway Status GW000026 ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000026/status';
+  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+  echo "<br><br>------------Retrieve Gateway Status GW000026 ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000026/adminKey';
+  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+  //
+  $subAccount = "lock-264-38";
+  //
+  echo "<br><br>---------------------Retrieve all locks FROM . $subAccount . ------------------ <br>";
+  $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/" . $subAccount . "/locks";
+  $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
+
   echo "<br><br>------------Retrieve All User Account ------------------ <br>";
   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
-
-  echo "<br><br>------------Retrieve Gateway Status GW000006 ------------------ <br>";
-  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000006/status';
+  echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
-
-
-  echo "<br><br>---------------------Retrieve lock status UL002063 ------------------ <br>";
-  $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002063/status';
-
-  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
-
-  $data = json_decode($result3);
-  $info = $data->info;
-
-
-  echo "<br><br>---------------------Remote unlock ------------------ <br>";
-  $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002063/remoteUnlock';
-
-  $result3 = CallAPIWithToken("PUT", $urlStatus, $tokenAuth, false); echo $result3;
-
-  $data = json_decode($result3);
-  $instruction_id = $data->info->s_instruction_id;
-  echo "<br>instruction id: ";
-  echo $instruction_id;
-
-
-  echo "<br><br>---------------------Retrieve instruction status ------------------ <br>";
-  $urlStatus = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/instruction?instruction_id=$instruction_id";
-  echo $urlStatus;
-  echo "<br>";
-
-  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, true); echo $result3;
-
-  $data = json_decode($result3);
-  $info = $data->info;
-
-
-
-
-
-  echo "<br><br>---------------------Retrieve ALL locks  ------------------ <br>";
-  $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks";
-  $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
-
-
-
-  // echo "<br><br>------------Retrieve Gateway Status GWS00014 ------------------ <br>";
-  // $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GWS00014/status';
-  // $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
-  //
-  // $subAccount = "lock-264-7";
-  //
-  // echo "<br><br>---------------------Retrieve all locks FROM . $subAccount . ------------------ <br>";
-  // $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/" . $subAccount . "/locks";
-  // $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
 
 
   // echo "<br><br>---------------------Retrieve lock status BLE ACR 001 UL002870 ------------------ <br>";
@@ -708,9 +721,11 @@ function CallAPIWithToken($method, $url, $token, $data = false)
             curl_setopt($curl, CURLOPT_PUT, 1);
             break;
         default:
-            if ($data)
-                $url = sprintf("%s?%s", $url, http_build_query($data));
-                //curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+          break;
+            // if ($data)
+            //     //$url = sprintf("%s?%s", $url, http_build_query($data));
+            //     //curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
+            //     echo $url;
     }
 
     // // Optional Authentication:

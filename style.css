@@ -1,6 +1,8 @@
+
+
 /*jh*/
 .navbar {
-    background-color: #333;
+    background-color: #336699;
 }
 
 .navbar span {
@@ -11,7 +13,6 @@
   font-size: 20px;
   color: white;
 }
-
 
 .dropdown-menu-right { /* bootstrap seems to not have this in url js source */
   right: 0;

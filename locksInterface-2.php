@@ -114,7 +114,7 @@ $lockData = $dataLocks->info;
 $sqlInterface = new SQLInteface($lockData, $tokenAuth, $app_account);
 
 
-$sqlInterface->updateLockDataToSQL();
+//$sqlInterface->updateLockDataToSQL();
 
 $locks = $sqlInterface->getLockData($app_account);
 
