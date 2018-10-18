@@ -14,6 +14,29 @@ class DbOperationGW {
         $this->conn = $db->connect();
     }
 
+    public function storeLastHeartBeatInDatabase($last_heart_beat, $factory_name)
+    {
+      //FIRST CHECK IF THIS LOCK ALREADY EXISTS IN DB
+      $stmt = $this->conn->prepare("SELECT g_factory_name FROM app_activated_gateways WHERE g_factory_name = ?");
+      $stmt->bind_param("s", $factory_name);
+      $stmt->execute();
+      $stmt->store_result();
+
+      if ($stmt->num_rows > 0){
+        //gw already exists so update info
+        $stmt = $this->conn->prepare("UPDATE app_activated_gateways SET g_date_last_reported = ? WHERE g_factory_name = ?");
+        $stmt->bind_param("ss", $last_heart_beat, $factory_name);
+        if ($stmt->execute()) {
+            return SQL_SUCCESSFUL;
+        } else {
+            return SQL_UNSUCCESSFUL;
+        }
+      } else {
+        //gw does not exist in db, so return FALSE
+        return FACTORY_NAME_DOES_NOT_EXIST;
+      }
+    }
+
     public function updateGateway($factory_name, $gateway_title, $gateway_status)
     {
       //FIRST CHECK IF THIS LOCK ALREADY EXISTS IN DB
@@ -40,7 +63,7 @@ class DbOperationGW {
     public function getActivatedGWsForUserID($id)
     {
 
-      $sql = "SELECT g_factory_name, g_gateway_title, g_gateway_admin_key FROM app_activated_gateways WHERE u_user_id = '".$id."'";
+      $sql = "SELECT g_factory_name, g_gateway_title, g_gateway_admin_key, g_mac_address FROM app_activated_gateways WHERE u_user_id = '".$id."'";
       $result = $this->conn->query($sql);
 
       if ($result->num_rows > 0) {
@@ -51,6 +74,7 @@ class DbOperationGW {
           $gw->factory_name = $row['g_factory_name'];
           $gw->gateway_name = $row['g_gateway_title'];
           $gw->admin_key = $row['g_gateway_admin_key'];
+          $gw->mac_address = $row['g_mac_address'];
           $gateways[] = $gw; //appends a 'lock' object to 'locks' array
 
         }
@@ -80,7 +104,7 @@ class DbOperationGW {
       }
     }
 
-    public function insertActivatedGateway($id, $factory_name, $admin_key)
+    public function insertActivatedGateway($id, $factory_name, $admin_key, $gateway_mac)
     {
 
       //FIRST CHECK IF THIS LOCK ALREADY EXISTS IN DB
@@ -91,18 +115,17 @@ class DbOperationGW {
 
       if ($stmt->num_rows > 0){
         //lock already exists so update info to new user
-        $stmt = $this->conn->prepare("UPDATE app_activated_gateways SET u_user_id = ?, g_gateway_admin_key = ? WHERE g_factory_name = ?");
-        $stmt->bind_param("sss", $id, $admin_key, $factory_name);
+        $stmt = $this->conn->prepare("UPDATE app_activated_gateways SET u_user_id = ?, g_gateway_admin_key = ?, g_mac_address = ? WHERE g_factory_name = ?");
+        $stmt->bind_param("ssss", $id, $admin_key, $gateway_mac, $factory_name);
         if ($stmt->execute()) {
             return LOCK_ACTIVATE_SUCCESSFUL;
         } else {
             return LOCK_ACTIVATE_UNSUCCESSFUL;
         }
-
       } else {
         //lock does not exist in db yet, so INSERT
-        $stmt = $this->conn->prepare("INSERT INTO app_activated_gateways (g_factory_name, u_user_id, g_gateway_admin_key) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $factory_name, $id, $admin_key);
+        $stmt = $this->conn->prepare("INSERT INTO app_activated_gateways (g_factory_name, u_user_id, g_gateway_admin_key, g_mac_address) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $factory_name, $id, $admin_key, $gateway_mac);
         if ($stmt->execute()) {
             return LOCK_ACTIVATE_SUCCESSFUL;
         } else {
@@ -117,6 +140,7 @@ class ActivatedGateway {
   public $factory_name;
   public $gateway_name;
   public $admin_key;
+  public $mac_address;
 
 }
 

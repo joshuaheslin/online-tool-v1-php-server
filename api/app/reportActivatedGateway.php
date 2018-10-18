@@ -36,8 +36,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //echo "here4";
               }
               //echo "hi";
+              $url = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
+              $jsonResult = $fn->CallAPIWithToken("GET", $url, $tokenAuth, false);
+              $lock_info = json_decode($jsonResult);
+              $info = $lock_info->info;
+              //echo $jsonResult;
+              foreach ($info as $value){
 
-              $result = $dbGW->insertActivatedGateway($_POST['u_user_id'], $_POST['g_factory_name'], $admin_key);
+                $json_factory_name = $value->s_gateway_name;
+                //echo $json_factory_name;
+
+                if ($json_factory_name == $factory_name) {
+                  $gateway_mac = $value->s_gateway_mac;
+                  //echo $gateway_mac;
+                }
+              }
+
+              $result = $dbGW->insertActivatedGateway($_POST['u_user_id'], $_POST['g_factory_name'], $admin_key, $gateway_mac);
 
               if ($result == LOCK_ACTIVATE_SUCCESSFUL) {
                   $response['error'] = false;
@@ -71,4 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 echo json_encode($response);
+
+
 ?>
