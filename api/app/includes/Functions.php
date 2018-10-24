@@ -1,8 +1,5 @@
 <?php
 
-
-//echo "main functions loaded";
-
 class Functions
 {
     private $token;
@@ -11,7 +8,18 @@ class Functions
     {
     }
 
-
+    public function createRandomPasscode($numberOfDigits = 4)
+    {
+        $i = 0; //counter
+        $pin = ""; //our default pin is blank.
+        while($i < $numberOfDigits){
+            //generate a random number between 0 and 9.
+            $pin .= mt_rand(0, 9);
+            $i++;
+        }
+        return $pin;
+    }
+    
     public function CallAPIWithToken($method, $url, $token, $data = false)
     {
         $curl = curl_init();

@@ -25,5 +25,9 @@ define('FACTORY_NAME_DOES_NOT_EXIST', 2);
 //PHPMAILER
 define('ROOT_URL', "http://localhost:8888/kas-server/api/app/password/");
 
+define('K_PASSCODE_SECRET', "TydS7X0g4gwIOIvwp0NnBdl3xtRTdgco");
+define('K_PASSCODE_SECRET_DOES_NOT_MATCH', 0);
+define('K_PASSCODE_DOES_NOT_EXIST', 1);
+
 
 ?>

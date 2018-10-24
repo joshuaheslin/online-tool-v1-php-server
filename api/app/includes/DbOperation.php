@@ -14,9 +14,49 @@ class DbOperation {
         $this->conn = $db->connect();
     }
 
+    // public function updateKey($factory_name, $key_title) 
+    // {
+    //     //TODO - UNFINISHED!!!
+    //   $stmt = $this->conn->prepare("UPDATE app_activated_locks SET l_lock_title = ? WHERE l_factory_name = ?");
+    //   $stmt->bind_param("ss", $lock_title, $factory_name);
+    //   if ($stmt->execute()) {
+    //       return SQL_SUCCESSFUL;
+    //   } else {
+    //       return SQL_UNSUCCESSFUL;
+    //   }
+    // }
+
+    public function insertKeyDataIntoSQL($app_account, $target_mobile, $sharedKey, $passcode)
+    {
+        $factory_name = $sharedKey->lock_factory_number;
+        $room_number = $sharedKey->room_number;
+        $key_string = $sharedKey->key_string;
+        $start_time = $sharedKey->start_time;
+        $end_time = $sharedKey->end_time;
+
+        $stmt = $this->conn->prepare("INSERT INTO app_active_keys (k_app_account, k_factory_name, k_room_number, k_target_mobile, k_key_string, k_start_time, k_end_time, k_passcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssssss", $app_account, $factory_name, $room_number, $target_mobile, $key_string, $start_time, $end_time, $passcode);
+        if ($stmt->execute()) {
+            return SQL_SUCCESSFUL;
+        } else {
+            return SQL_UNSUCCESSFUL;
+        }
+    }
+
+    public function passcodeAlreadyExists($passcode)
+    {
+        $sql = "SELECT * FROM app_active_keys WHERE k_passcode = '".$passcode."'";
+        $result = $this->conn->query($sql);
+  
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function updateLock($factory_name, $lock_title)
     {
-      //lock does not exist in db yet, so INSERT
       $stmt = $this->conn->prepare("UPDATE app_activated_locks SET l_lock_title = ? WHERE l_factory_name = ?");
       $stmt->bind_param("ss", $lock_title, $factory_name);
       if ($stmt->execute()) {
@@ -24,6 +64,42 @@ class DbOperation {
       } else {
           return SQL_UNSUCCESSFUL;
       }
+    }
+
+    public function getActiveKeysForPasscode($passcode, $passcode_secret)
+    {
+
+        if ($passcode_secret == K_PASSCODE_SECRET) {
+
+            //$keys = array();
+            $sql = "SELECT k_app_account, k_factory_name, k_room_number, k_target_mobile, k_key_string, k_start_time, k_end_time  FROM app_active_keys WHERE k_passcode = '".$passcode."'";
+            $result = $this->conn->query($sql);
+    
+            if ($result->num_rows > 0) {
+    
+                while ($row = $result->fetch_assoc()) {
+    
+                $key = new ActiveKey();
+                $key->k_app_account = $row['k_app_account'];
+                $key->k_factory_name = $row['k_factory_name'];
+                $key->k_room_number = $row['k_room_number'];
+                $key->k_target_mobile = $row['k_target_mobile'];
+                $key->k_key_string = $row['k_key_string'];
+                $key->k_start_time = $row['k_start_time'];
+                $key->k_end_time = $row['k_end_time'];
+                $keys[] = $key; //appends a 'key' object to 'locks' array
+    
+                }
+
+                return $keys;
+
+            } else {
+                return K_PASSCODE_DOES_NOT_EXIST;
+            }
+
+        } else {
+            return K_PASSCODE_SECRET_DOES_NOT_MATCH;
+        }
     }
 
     public function getActivatedLocksForUserID($id)
@@ -189,5 +265,18 @@ class ActivatedLock {
   public $admin_key;
 
 }
+
+class ActiveKey {
+
+    public $k_app_account;
+    public $k_factory_name;
+    public $k_room_number;
+    public $k_target_mobile;
+    public $k_key_string;
+    public $k_start_time;
+    public $k_end_time;
+
+}
+
 
 ?>

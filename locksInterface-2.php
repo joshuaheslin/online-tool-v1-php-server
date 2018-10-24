@@ -58,16 +58,16 @@ function echoHello(){
            var inputText;
            input = document.getElementById('input_' + this.id);
            inputText = input.value;
-           //alert(inputText);
+           alert(inputText);
 
            rowData = {
                lock_name: id,
                lock_text: inputText
            };
 
-           $.ajax({
+           jQuery.ajax({
                url:'update_row_name.php',
-               type:'post',
+               type:'POST',
                data:rowData,
                success: function(response) {
                    alert(response);
@@ -110,9 +110,7 @@ $result = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false);
 $dataLocks = json_decode($result);
 $lockData = $dataLocks->info;
 
-
 $sqlInterface = new SQLInteface($lockData, $tokenAuth, $app_account);
-
 
 //$sqlInterface->updateLockDataToSQL();
 
@@ -129,7 +127,7 @@ echo "<tr>";
    // $s_LockName = (string)$value-> s_lock_name;
     echo "<th onclick='sortTable(0)'>Door Name        <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick=''>                                                             </th>";
-    echo "<th onclick='sortTable(2)'>ID               <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(2)'>Room               <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(3)'>Number           <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(4)'>Status           <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(5)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
@@ -138,8 +136,8 @@ echo "<tr>";
     echo "<th onclick='sortTable(8)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(9)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(10)'>GW2 Name         <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick=''>Remote Unlock</th>";
-    echo "<th onclick=''>Pin Code List</th>";
+    // echo "<th onclick=''>Remote Unlock</th>";
+    // echo "<th onclick=''>Pin Code List</th>";
     echo "<th onclick=''></th>";
 
    // echo "<button type=". "button" . "class=" . "btn" . ">Basic</button>";
@@ -185,11 +183,11 @@ foreach ($locks as $value){
     echo "<td>" . $s_GW2_LockLastScanned . "</td>";
     echo "<td>" . $s_GW2_LockGWName . "</td>";
 
-    echo "<td><button class='btn btn-primary btn-sm' onclick='remote_unlock($s_LockNumber)' id='unlock_".$s_LockNumber."' name='button_row_unlock' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Unlock</button></td>";
+    // echo "<td><button class='btn btn-primary btn-sm' onclick='remote_unlock($s_LockNumber)' id='unlock_".$s_LockNumber."' name='button_row_unlock' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Unlock</button></td>";
 
-    //echo "<form method='post' action='pincodes.php'";
-    echo "<td><a href='pincodes.php?factory_name=$s_LockNumber&room_id=$s_LockID&door_name=$s_LocalDoorName'><button onclick='showSpinnerForRow($s_LockNumber)' class='btn btn-success btn-sm'  id='pincodes_".$s_LockNumber."' name='button_row_pincodes' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Manage</button></a></td>";
-    //echo "";
+    // //echo "<form method='post' action='pincodes.php'";
+    // echo "<td><a href='pincodes.php?factory_name=$s_LockNumber&room_id=$s_LockID&door_name=$s_LocalDoorName'><button onclick='showSpinnerForRow($s_LockNumber)' class='btn btn-success btn-sm'  id='pincodes_".$s_LockNumber."' name='button_row_pincodes' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Manage</button></a></td>";
+    // //echo "";
 
     // $_SESSION['factory_name'] = $s_lockNumber;
     echo "<td><div class='loader' id='spinner_".$s_LockNumber."' name='row_spinner' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned)."></div></td>";
