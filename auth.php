@@ -9,7 +9,9 @@ $url = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/accesstoken';
 $params = array(
     'password' => '445566',       //ENTER THE SERVER PASSWORD HERE 445566
     'device_mac' => '',
-    'username' => 'kas-server'    //ENTER THE SERVER USERNAME HERE kas-server
+    'username' => 'kas-server',    //ENTER THE SERVER USERNAME HERE kas-server
+    'callback_address' => 'http://localhost:8888/kas-server/api/app/callbackKeySharingRequest.php',    //ENTER THE SERVER USERNAME HERE kas-server
+    'keeper_accounts' => ['lock-264-7'],    //ENTER THE SERVER USERNAME HERE kas-server
 );
 
 $responseJson = CallAPIAuth("POST", $url, $params);

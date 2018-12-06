@@ -1,11 +1,8 @@
 <?PHP
 include "sqlconn.php";
-$conn = connect('localhost','user','','mydb');
+$conn = connect();
 
 //sanitize Variables
-
-echo "HI";
-
 $lockName = mysqli_real_escape_string($conn, $_POST['lock_name']);
 $lockText = mysqli_real_escape_string($conn, $_POST['lock_text']);
 

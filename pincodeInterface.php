@@ -45,7 +45,7 @@ function echoHello(){
 
 <?php
 
-include "SQL_interface.php";
+include "includes/SQL_interface.php";
 include "functions.php";
 
 $tokenAuth = TokenAuth(); //3hours
@@ -94,7 +94,9 @@ echo "<button class='btn btn-primary' id='pincode_".$s_LockNumber."' name='creat
 
 echo "<br><br>OR<br><br>";
 
-echo "<code>onlinetool.kas.com.au/api/pincode/startDate/endDate</code>";
+echo "Your token: <code>s784ofghjklsg893hsdhaf</code><br>";
+
+echo "<code>onlinetool.kas.com.au/api/pincode/1234/startDate/endDate</code>";
 
 echo "<br><br>";
 

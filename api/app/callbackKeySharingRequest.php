@@ -63,6 +63,8 @@ echo $passcode; echo "\n";
 
 // //MARK: INSERT DATA INTO SQL
 
+echo "Server: $_SERVER \n";
+
 
 $app_account = $result['app_account'];
 $target_mobile = $result['target_user_mobile'];

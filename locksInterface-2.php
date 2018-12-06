@@ -66,7 +66,7 @@ function echoHello(){
            };
 
            jQuery.ajax({
-               url:'update_row_name.php',
+               url:'includes/update_row_name.php',
                type:'POST',
                data:rowData,
                success: function(response) {
@@ -83,6 +83,29 @@ function echoHello(){
 </script>
 
 <script>
+function searchBar() {
+  // Declare variables 
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable2");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+}
+</script>
+
+<script>
 $(document).ready(function() {
   //alert("doc loaded");
     $('[name="row_spinner"]').hide();
@@ -91,19 +114,18 @@ $(document).ready(function() {
 
 <?php
 
-include "SQL_interface.php";
+include "includes/SQL_interface.php";
 include "functions.php";
 
 $tokenAuth = TokenAuth(); //3hours
-
 //echo $tokenAuth;
 
 /*
 WARNING: This will override ALL 'appaccount' fields in SQL table to the $app_account value set below.
 */
 //$urlLocks = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks';
-
 //$app_account = 'lock-264-7';
+
 $urlLocks = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/' . $app_account . '/locks';
 
 $result = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false);
@@ -112,7 +134,7 @@ $lockData = $dataLocks->info;
 
 $sqlInterface = new SQLInteface($lockData, $tokenAuth, $app_account);
 
-//$sqlInterface->updateLockDataToSQL();
+$sqlInterface->updateLockDataToSQL();
 
 $locks = $sqlInterface->getLockData($app_account);
 
@@ -127,8 +149,8 @@ echo "<tr>";
    // $s_LockName = (string)$value-> s_lock_name;
     echo "<th onclick='sortTable(0)'>Door Name        <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick=''>                                                             </th>";
-    echo "<th onclick='sortTable(2)'>Room               <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(3)'>Number           <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(2)'>Room Number              <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(3)'>Factory Number     <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(4)'>Status           <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(5)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(6)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
@@ -136,8 +158,9 @@ echo "<tr>";
     echo "<th onclick='sortTable(8)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(9)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(10)'>GW2 Name         <i class='fa fa-fw fa-sort'></i></th>";
-    // echo "<th onclick=''>Remote Unlock</th>";
-    // echo "<th onclick=''>Pin Code List</th>";
+    echo "<th onclick=''>Remote Unlock</th>";
+    echo "<th onclick=''>Pin Code List</th>";
+    echo "<th onclick=''>RFID List</th>";
     echo "<th onclick=''></th>";
 
    // echo "<button type=". "button" . "class=" . "btn" . ">Basic</button>";
@@ -173,7 +196,7 @@ foreach ($locks as $value){
     echo "<td>" . $s_LockID . "</td>";
     echo "<td>" . $s_LockNumber . "</td>";
 
-    echo "<td><img src='" . determine_lock_status_colour($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned) . ".png' height='22' width='22'></td>";
+    echo "<td><img src='includes/" . determine_lock_status_colour($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned) . ".png' height='22' width='22'></td>";
 
     echo "<td>" . $s_GW1_LockSignalStrength . "</td>";
     echo "<td>" . $s_GW1_LockLastScanned . "</td>";
@@ -183,11 +206,14 @@ foreach ($locks as $value){
     echo "<td>" . $s_GW2_LockLastScanned . "</td>";
     echo "<td>" . $s_GW2_LockGWName . "</td>";
 
-    // echo "<td><button class='btn btn-primary btn-sm' onclick='remote_unlock($s_LockNumber)' id='unlock_".$s_LockNumber."' name='button_row_unlock' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Unlock</button></td>";
+    echo "<td><button class='btn btn-primary btn-sm' onclick='remote_unlock($s_LockNumber)' id='unlock_".$s_LockNumber."' name='button_row_unlock' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Unlock</button></td>";
 
     // //echo "<form method='post' action='pincodes.php'";
-    // echo "<td><a href='pincodes.php?factory_name=$s_LockNumber&room_id=$s_LockID&door_name=$s_LocalDoorName'><button onclick='showSpinnerForRow($s_LockNumber)' class='btn btn-success btn-sm'  id='pincodes_".$s_LockNumber."' name='button_row_pincodes' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Manage</button></a></td>";
+    echo "<td><a href='pincodes.php?factory_name=$s_LockNumber&room_id=$s_LockID&door_name=$s_LocalDoorName'><button onclick='showSpinnerForRow($s_LockNumber)' class='btn btn-success btn-sm'  id='pincodes_".$s_LockNumber."' name='button_row_pincodes' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Pin codes</button></a></td>";
     // //echo "";
+
+    echo "<td><button onclick='showSpinnerForRow($s_LockNumber)' class='btn btn-warning btn-sm'  id='pincodes_".$s_LockNumber."' name='button_row_rfid' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">RFID</button></a></td>";
+
 
     // $_SESSION['factory_name'] = $s_lockNumber;
     echo "<td><div class='loader' id='spinner_".$s_LockNumber."' name='row_spinner' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned)."></div></td>";

@@ -1,24 +1,41 @@
 <?php
 
-// $curl = curl_init();
+$curl = curl_init();
 
-// $access_token = 'Ln2vzC53M5tVSaylSFVmJPKHeQXKulddeJCS4poI';
+$access_token = 'oVMrd9drHEqVuUsEgtV9BfMdHOGZe0NW1lyK4zue';
 
-// // $curl_post_data = array(
-// //     'reservationID' => '5162194486',
-// // );
 
-// curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer '. $access_token ));
-// curl_setopt($curl, CURLOPT_URL, "https://hotels.cloudbeds.com/api/v1.1/getReservation?reservationID=3022527661");
-// //curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+$subject = array(
+    'en' => 'test',
+);
+$body = array(
+    'en' => 'body',
+);
+//print_r($subject);
 
-// $responseJson = curl_exec($curl);
-// curl_close($curl);
+$curl_post_data = array (
+    'name' => 'MobileKey',
+    'from' => 'josh@kas.com.au',
+    'subject' => $subject,
+    'body' => $body,
+    'emailType' => 'nonMarketing',
+);
 
-//echo $responseJson;
+print_r($curl_post_data);
 
-include('includes/Functions.php');
-$fn = new Functions();
+curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer '. $access_token ));
+curl_setopt($curl, CURLOPT_URL, "https://hotels.cloudbeds.com/api/v1.1/postEmailTemplate");
+
+curl_setopt($curl, CURLOPT_POST, 1);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+
+$responseJson = curl_exec($curl);
+curl_close($curl);
+
+echo $responseJson;
+
+// include('includes/Functions.php');
+// $fn = new Functions();
 
 
 // $refresh_token = 'JX80ibf8Bb3bc3DMLo6wSrK0vxYq6I0SG8WF42Gr';

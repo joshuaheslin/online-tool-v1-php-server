@@ -14,7 +14,7 @@ array_push($byte_array,hexdec(1)); //I add an extra byte '1' as a message type
 
 echo $byte_array;
 $service_port = 10003;
-$address = gethostbyname('192.168.15.138');
+$address = gethostbyname('27.113.241.146');
 
     echo "Creating socket for '$address' on port '$service_port'...<br>";
     $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);

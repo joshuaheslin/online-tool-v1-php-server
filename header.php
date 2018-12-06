@@ -20,9 +20,9 @@ $timezone_login = $_SESSION['timezone'];
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
   <link rel="stylesheet" href="style.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
@@ -31,8 +31,27 @@ $timezone_login = $_SESSION['timezone'];
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 </head>
 
-<body>
+<script>
+function deleteDataFunction(appaccount){
+  alert(appaccount);
+  alert("WARNING: This will delete all 'Door Name' references. Save/screenshot the page before refreshing.")
+    $.ajax({
+        type: "POST",
+        url: "includes/delete_stale_data.php",
+        data: {
+            app_account:appaccount
+        },
+        success: function (data){
+            alert(data);
+        },
+        error: function (xhr, ajaxOptions, thrownError){
+        }
+    });
+    return false;
+}
+</script>
 
+<body>
 
 <div class="navbar" role="navigation">
 
@@ -46,6 +65,7 @@ $timezone_login = $_SESSION['timezone'];
     <div class="dropdown-menu dropdown-menu-right">
       <h6 class="dropdown-header">App Account: <?php echo $app_account;?></h6>
       <h6 class="dropdown-header">Property Name: <?php echo $_SESSION['property_name'];?></h6>
+      <a class="dropdown-item" href="" onclick="return deleteDataFunction('<?php echo $app_account; ?>')"><i class="fa fa-trash" aria-hidden="true"></i></i> Delete stale data</a>
       <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i> Log out</a>
     </div>
 
@@ -77,8 +97,8 @@ $timezone_login = $_SESSION['timezone'];
   </div>
 
   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <input class="form-control mr-sm-3" id="myInput2" type="search" onkeyup="searchBar()" placeholder="Enter a search term..." aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" onclick="alert('Enter a search term in the input box. Table will automatically filter.');">Search</button>
   </form>
 
 

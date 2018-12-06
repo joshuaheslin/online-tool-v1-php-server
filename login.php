@@ -1,8 +1,8 @@
 <?php
-   include("sqlconn.php");
+   include("includes/sqlconn.php");
    session_start();
 
-   $conn = connect('localhost','user','','mydb');
+   $conn = connect();
 
    if($_SERVER["REQUEST_METHOD"] == "POST") {
       // username and password sent from form

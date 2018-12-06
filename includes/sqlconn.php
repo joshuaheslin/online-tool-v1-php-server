@@ -1,19 +1,11 @@
 <?php
 //echo "/--------------SQL CONNECT---------------/ <br>";
 
-//$host = 'localhost';
-//$user='kas';
-//$pass='kas123';
-//$db='mydb';
+include "Constants.php";
 
+function connect(){
 
-//$c = mysqli_connect();
-
-
-
-function  connect($host,$user,$pass,$db){
-
-    $conn = mysqli_connect($host, $user, $pass, $db);
+    $conn = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
     if (!$conn) {
         die('Could not connect: ' . mysqli_error());
         print_r(mysqli_error());

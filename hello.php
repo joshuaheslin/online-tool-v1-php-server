@@ -93,23 +93,23 @@ echo "<br><br>============================DEMO TESTING==========================
 
 
 
-  echo "<br><br>------------Retrieve Gateway Status GWS00030 ------------------ <br>";
-  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GWS00030/status';
+//   echo "<br><br>------------Retrieve Gateway Status GWS00030 ------------------ <br>";
+//   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GWS00030/status';
+//   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+
+//   $l_factory_name = "SS000139";
+//   echo "<br><br>---------------------Retrieve lock status . $l_factory_name . ------------------ <br>";
+//   $urlStatus = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/" . $l_factory_name . "/status";
+
+//   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+
+//   $data = json_decode($result3);
+//   $info = $data->info;
+
+  echo "<br><br>------------Retrieve Gateway Admin Key ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000158/adminKey';
   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
-
-
-  $l_factory_name = "SS000139";
-  echo "<br><br>---------------------Retrieve lock status . $l_factory_name . ------------------ <br>";
-  $urlStatus = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/" . $l_factory_name . "/status";
-
-  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
-
-  $data = json_decode($result3);
-  $info = $data->info;
-
-  // echo "<br><br>------------Retrieve Gateway Admin Key GW000031 ------------------ <br>";
-  // $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000006/adminKey';
-  // $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
   //
   $subAccount = "lock-264-7";
@@ -118,22 +118,22 @@ echo "<br><br>============================DEMO TESTING==========================
   $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/" . $subAccount . "/locks";
   $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
 
-  echo "<br><br>------------Retrieve All User Account ------------------ <br>";
-  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
-  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+//   echo "<br><br>------------Retrieve All User Account ------------------ <br>";
+//   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
+//   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
-  echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
-  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
-  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+//   echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
+//   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
+//   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
 
-  // echo "<br><br>---------------------Retrieve lock status BLE ACR 001 UL002870 ------------------ <br>";
-  // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002870/status';
-  //
-  // $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
-  //
-  // $data = json_decode($result3);
-  // $info = $data->info;
+  echo "<br><br>---------------------Retrieve lock status BLE ACR 001 UL002870 ------------------ <br>";
+  $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/SS000139/status';
+  
+  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+  
+  $data = json_decode($result3);
+  $info = $data->info;
   //
   // echo "<br><br>---------------------Retrieve lock status 0101 ONYX UL002333 ------------------ <br>";
   // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002333/status';

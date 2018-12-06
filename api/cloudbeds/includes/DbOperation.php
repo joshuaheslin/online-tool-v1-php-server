@@ -76,15 +76,36 @@ class DbOperation {
       }
     }
 
+    public function incrementLoginEvent($email) 
+    {
+        $stmt = $this->conn->prepare("UPDATE users SET number_of_logins = Coalesce(number_of_logins, 0) + 1 WHERE email = ?");
+        $stmt->bind_param("s", $email);
+        if ($stmt->execute()) {
+            
+            $stmt = $this->conn->prepare("SELECT number_of_logins FROM users WHERE email = ?");
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->bind_result($number_of_logins);
+            $stmt->fetch();                
+            $result = array();
+            $result['number_of_logins'] = $number_of_logins;
+            return $result;
+            
+            //return ; //true
+
+        } else {
+            return 0; //false
+        }
+    }
+
     // ---------------------------------------
     // ------  LOGIN AND REGISTER LOGIC ------
     // ---------------------------------------
 
-    public function userWillLogin($email, $login_token)
+    public function userWillLogin($email, $password)
     {
-        $password = md5($pass);
-        $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = ? AND login_token = ?");
-        $stmt->bind_param("ss", $email, $login_token);
+        $stmt = $this->conn->prepare("SELECT id FROM users WHERE email = ? AND user_password = ?");
+        $stmt->bind_param("ss", $email, $password);
         $stmt->execute();
         $stmt->store_result();
         return $stmt->num_rows > 0;

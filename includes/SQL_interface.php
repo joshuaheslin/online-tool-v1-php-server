@@ -15,14 +15,7 @@ class SQLInteface {
     // Constructor
     public function __construct($lockData, $tokenAuth, $app_account){
 
-        //$this->conn = connect('35.189.47.93','user2','','mydb');
-        $this->conn = connect('localhost','user','','mydb');
-        //$this->conn = connect('http://35.189.47.93/','user2','','mydb');  //don't know how to connect to remote sql server :( JH
-
-        // $host = 'localhost';//'http://35.189.47.93/'; //localhost
-        // $user= 'user';//'root'; //user
-        // $pass='';//'jDHWjnFwcpbN2r';  // 'empty'
-        // $db='mydb';
+        $this->conn = connect();
 
         //user / 1234!@#$
 
@@ -37,7 +30,7 @@ class SQLInteface {
         //echo $this->tokenAuth;
     }
 
-    public function updateLockToSQL($s_lock_name, $s_room_name){ //$device = "UL002058";
+    public function updateLockToSQL($s_lock_name, $s_room_name){
 
         $lockName = $s_lock_name;
         $app_account = $this->app_account;
@@ -161,7 +154,7 @@ class SQLInteface {
             '$sqlGateway_2_ID', '$sqlGateway_2_Date', '$sqlGateway_2_Signal', '$sqlGateway_3_ID', '$sqlGateway_3_Date', '$sqlGateway_3_Signal', '', '')";
 
             if ($this->conn->query($sql_insert) === TRUE) {
-                echo "<br>New record created successfully";
+                //echo "<br>New record created successfully"; //You don't need to notify user that new record is entered, the table will show the new record.
             } else {
                 echo "Error: " . $sql_insert . "<br>" . $this->conn->error;
             }
@@ -172,7 +165,7 @@ class SQLInteface {
                g3_date_last_synced='$sqlGateway_3_Date', g3_signal='$sqlGateway_3_Signal' WHERE lock_name='$lockName'";
 
             if ($this->conn->query($sql_update) === TRUE) {
-                //echo "<br>record updated successfully";
+                //echo "<br>Record(s) updated successfully";
             } else {
                 echo "Error: " . $sql_update . "<br>" . $this->conn->error;
             }
@@ -199,19 +192,6 @@ class SQLInteface {
 
     }
 
-    public function lock_is_in_SQL($lockName){
-
-      $sql = "SELECT * FROM `lockstatus` WHERE lock_name='$lockName'";
-      $result = $this->conn->query($sql);
-
-      if ($result->num_rows == 1){ //match found!
-        return true;
-      } else {
-        return false;
-      }
-
-    }
-
     public function deleteLockFromSQL($lockName){
 
       echo "will delete lock $lockName.";
@@ -227,16 +207,7 @@ class SQLInteface {
             $s_lock_name = $value->s_lock_name;
             $s_room_name = $value->s_room_name;
 
-            //TODO
-            if ($this->lock_is_in_SQL($s_lock_name)){
-
-                $this->updateLockToSQL($s_lock_name, $s_room_name);
-
-            } else {
-
-              $this->deleteLockFromSQL($s_lock_name);
-
-            }
+            $this->updateLockToSQL($s_lock_name, $s_room_name);
 
         }
 
@@ -289,16 +260,6 @@ class SQLInteface {
         //jh
         $locks = array();
 
-
-        /*
-        $sql = "SELECT * FROM 'lockstatus'";
-        if ($this->conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $this->conn->error;
-        }
-
-        //$result = $this->conn->query($sql);  */
 
         if ($this->conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);

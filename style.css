@@ -225,7 +225,7 @@ bottom: 0px;
 }
 
 div#footer ul li a:hover,a:active {
-background-color:#00CC33;
+background-color:#fff44f;
 }
 
 div#pol_container {
@@ -309,7 +309,7 @@ text-decoration:none; text-transform:uppercase;
 }
 
 div#prod_cat_links ul li a:hover,a:active {
-background-color:#00CC33;
+background-color:#fff44f;
 }
 
 div#serv_cat_links {
@@ -336,7 +336,7 @@ text-decoration:none; text-transform:uppercase;
 }
 
 div#serv_cat_links ul li a:hover,a:active {
-background-color:#00CC33;
+background-color:#fff44f;
 }
 
 div#prod_review_box {
