@@ -1,9 +1,9 @@
 <?php
 echo "hello <br>";
-include "auth.php"; $tokenAuth = $response->access_token;
+//include "auth.php"; $tokenAuth = $response->access_token;
 //include "sqlconn.php";
 
-//$tokenAuth = "c4011a117ce8d51d32a0bc0b55269dbd704705a4054a0a53"; //3hours
+$tokenAuth = "7db028aba543f18c5786b7eb5d9088803d60b3145fa78619"; //3hours
 $tokenRefresh = $response->refresh_token;
 
 /*
@@ -107,33 +107,48 @@ echo "<br><br>============================DEMO TESTING==========================
 //   $data = json_decode($result3);
 //   $info = $data->info;
 
-  echo "<br><br>------------Retrieve Gateway Admin Key ------------------ <br>";
-  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000158/adminKey';
-  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+//   echo "<br><br>------------Retrieve Gateway Admin Key ------------------ <br>";
+//   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/GW000158/adminKey';
+//   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
   //
-  $subAccount = "lock-264-7";
+  $subAccount = "lock-264-64";
   //
   echo "<br><br>---------------------Retrieve all locks FROM . $subAccount . ------------------ <br>";
   $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/" . $subAccount . "/locks";
   $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
 
-//   echo "<br><br>------------Retrieve All User Account ------------------ <br>";
-//   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
-//   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+
+  echo "<br><br>---------------------Retrieve all gateways FROM . $subAccount . ------------------ <br>";
+  $urlLocks = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/" . $subAccount . "/gateways";
+  $result1 = CallAPIWithToken("GET", $urlLocks, $tokenAuth, false); echo $result1;
+
+
+    // $gateways = array("GWS00092", "GWS00080", "GWS00072", "GWS00073", "GWS00093", "GWS00090", "GWS00087");
+
+    // foreach ($gateways as $gw) {
+    //     echo "<br><br>------------Retrieve Gateway Status for $gw ------------------ <br>";
+    //     $urlGateway = "https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways/" . $gw . "/status";
+    //     $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
+    // }
+
+
+  echo "<br><br>------------Retrieve All User Account ------------------ <br>";
+  $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/subaccounts';
+  $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
 //   echo "<br><br>---------------------Retrieve All Gateways ------------------ <br>";
 //   $urlGateway = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/gateways';
 //   $result3 = CallAPIWithToken("GET", $urlGateway, $tokenAuth, false); echo $result3;
 
 
-  echo "<br><br>---------------------Retrieve lock status BLE ACR 001 UL002870 ------------------ <br>";
-  $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/SS000139/status';
+//   echo "<br><br>---------------------Retrieve lock status BLE ACR 001 UL002870 ------------------ <br>";
+//   $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/SS000139/status';
   
-  $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
+//   $result3 = CallAPIWithToken("GET", $urlStatus, $tokenAuth, false); echo $result3;
   
-  $data = json_decode($result3);
-  $info = $data->info;
+//   $data = json_decode($result3);
+//   $info = $data->info;
   //
   // echo "<br><br>---------------------Retrieve lock status 0101 ONYX UL002333 ------------------ <br>";
   // $urlStatus = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/locks/UL002333/status';

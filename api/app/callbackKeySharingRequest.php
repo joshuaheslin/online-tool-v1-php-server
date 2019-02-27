@@ -18,8 +18,8 @@ use Twilio\Rest\Client;
 
 
 //Make sure that it is a POST request.
-if(strcasecmp($_SERVER['REQUEST_METHOD'], 'POST') != 0){
-    throw new Exception('Request method must be POST!');
+if(strcasecmp($_SERVER['REQUEST_METHOD'], 'PUT') != 0){
+    throw new Exception('Request method must be PUT!');
 }
 //echo "hi";
 //Make sure that the content type of the POST request has been set to application/json
@@ -66,8 +66,8 @@ echo $passcode; echo "\n";
 echo "Server: $_SERVER \n";
 
 
-$app_account = $result['app_account'];
-$target_mobile = $result['target_user_mobile'];
+$app_account = $result['owner_id'];
+$target_mobile = $result['receiver_phone'];
 foreach ($result['keys'] as $qty => $keyArray) {
     // echo "Key: $key; Value: $value\n";
     // foreach ($keyArray as $key => $value) {
@@ -75,11 +75,11 @@ foreach ($result['keys'] as $qty => $keyArray) {
     // }
     //echo "next row \n";
     $sharedKey = new SharedKey();
-    $sharedKey->lock_factory_number = $keyArray['lock_factory_number'];
-    $sharedKey->room_number = $keyArray['room_number'];
-    $sharedKey->key_string = $keyArray['key_string'];
-    $sharedKey->start_time = $keyArray['start_time'];
-    $sharedKey->end_time = $keyArray['end_time'];
+    $sharedKey->lock_factory_number = $keyArray['s_lock_name'];
+    $sharedKey->room_number = $keyArray['s_room_name'];
+    $sharedKey->key_string = $keyArray['s_key_code'];
+    $sharedKey->start_time = $keyArray['l_start_time'];
+    $sharedKey->end_time = $keyArray['l_end_time'];
 
     print_r($sharedKey);
     
@@ -107,7 +107,7 @@ Download the KAS Mobile Access app and enter this passcode to retreive your key.
       
 App Download: kas.com.au 
 
-Enter this Passcode: 123456 
+Enter this Passcode: '.$passcode.'
 
 Thanks, Hotel Name 
 - on behalf of KAS Keyless Access Security',)

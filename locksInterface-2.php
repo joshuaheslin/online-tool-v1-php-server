@@ -152,15 +152,15 @@ echo "<tr>";
     echo "<th onclick='sortTable(2)'>Room Number              <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(3)'>Factory Number     <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(4)'>Status           <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(7)'>GW1 Name         <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(5)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(6)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(7)'>GW1 Name         <i class='fa fa-fw fa-sort'></i></th>";
+    echo "<th onclick='sortTable(10)'>GW2 Name         <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(8)'>Signal Strength  <i class='fa fa-fw fa-sort'></i></th>";
     echo "<th onclick='sortTable(9)'>Last Online      <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick='sortTable(10)'>GW2 Name         <i class='fa fa-fw fa-sort'></i></th>";
-    echo "<th onclick=''>Remote Unlock</th>";
-    echo "<th onclick=''>Pin Code List</th>";
-    echo "<th onclick=''>RFID List</th>";
+    // echo "<th onclick=''>Remote Unlock</th>";
+    // echo "<th onclick=''>Pin Code List</th>";
+    // echo "<th onclick=''>RFID List</th>";
     echo "<th onclick=''></th>";
 
    // echo "<button type=". "button" . "class=" . "btn" . ">Basic</button>";
@@ -197,14 +197,14 @@ foreach ($locks as $value){
     echo "<td>" . $s_LockNumber . "</td>";
 
     echo "<td><img src='includes/" . determine_lock_status_colour($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned) . ".png' height='22' width='22'></td>";
-
+    
+    echo "<td>" . $s_GW1_LockGWName . "</td>";
     echo "<td>" . $s_GW1_LockSignalStrength . "</td>";
     echo "<td>" . $s_GW1_LockLastScanned . "</td>";
-    echo "<td>" . $s_GW1_LockGWName . "</td>";
 
+    echo "<td>" . $s_GW2_LockGWName . "</td>";
     echo "<td>" . $s_GW2_LockSignalStrength . "</td>";
     echo "<td>" . $s_GW2_LockLastScanned . "</td>";
-    echo "<td>" . $s_GW2_LockGWName . "</td>";
 
     echo "<td><button class='btn btn-primary btn-sm' onclick='remote_unlock($s_LockNumber)' id='unlock_".$s_LockNumber."' name='button_row_unlock' ".is_button_hidden($s_GW1_LockSignalStrength,$s_GW1_LockLastScanned,$s_GW2_LockSignalStrength,$s_GW2_LockLastScanned).">Unlock</button></td>";
 

@@ -1,0 +1,11 @@
+[13-Feb-2017 13:09:48 UTC] PHP Fatal error:  Class 'Walker_Nav_Menu_Edit' not found in /kas/wp-content/plugins/nav-menu-roles/inc/class.Walker_Nav_Menu_Edit_Roles_4.7.php on line 12
+[13-Feb-2017 13:12:39 UTC] PHP Fatal error:  Uncaught Error: Call to a member function get_permalink() on boolean in /wordpress/plugins/woocommerce/2.6.14/includes/class-wc-post-data.php:55
+Stack trace:
+#0 /wordpress/core/4.7.2/wp-includes/class-wp-hook.php(300): WC_Post_Data::variation_post_link('https://kas.com...', Object(WP_Post))
+#1 /wordpress/core/4.7.2/wp-includes/plugin.php(203): WP_Hook->apply_filters('https://kas.com...', Array)
+#2 /wordpress/core/4.7.2/wp-includes/link-template.php(298): apply_filters('post_type_link', 'https://kas.com...', Object(WP_Post), false, false)
+#3 /wordpress/core/4.7.2/wp-includes/link-template.php(148): get_post_permalink(Object(WP_Post), false, false)
+#4 /wordpress/plugins/jetpack/4.6/sync/class.jetpack-sync-module-posts.php(222): get_permalink(Object(WP_Post))
+#5 [internal function]: Jetpack_Sync_Module_Posts->filter_post_content_and_add_links(Object(WP_Post))
+#6 /wordpress/plugins/jetpack/4.6/sync/class.jetpack-sync-module-posts.php(278): array_map(Array, Array)
+#7 /wordpress/core/4.7.2/wp-includes/class-wp-hook in /wordpress/plugins/woocommerce/2.6.14/includes/class-wc-post-data.php on line 55

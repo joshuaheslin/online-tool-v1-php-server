@@ -148,10 +148,9 @@ class SQLInteface {
 
         if ($result->num_rows == 0){
             $sql_insert = "INSERT INTO lockstatus (lock_name, customer_room_number, appaccount, g1_name, g1_date_last_synced,
-            g1_signal, g2_name, g2_date_last_synced, g2_signal, g3_name, g3_date_last_synced, g3_signal,
-            the_current_timestamp, timestamp_data_inserted)
+            g1_signal, g2_name, g2_date_last_synced, g2_signal, g3_name, g3_date_last_synced, g3_signal)
             VALUES ('$lockName', '$room_number', '$app_account', '$sqlGateway_1_ID', '$sqlGateway_1_Date', '$sqlGateway_1_Signal',
-            '$sqlGateway_2_ID', '$sqlGateway_2_Date', '$sqlGateway_2_Signal', '$sqlGateway_3_ID', '$sqlGateway_3_Date', '$sqlGateway_3_Signal', '', '')";
+            '$sqlGateway_2_ID', '$sqlGateway_2_Date', '$sqlGateway_2_Signal', '$sqlGateway_3_ID', '$sqlGateway_3_Date', '$sqlGateway_3_Signal')";
 
             if ($this->conn->query($sql_insert) === TRUE) {
                 //echo "<br>New record created successfully"; //You don't need to notify user that new record is entered, the table will show the new record.

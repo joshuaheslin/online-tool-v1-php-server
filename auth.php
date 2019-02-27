@@ -9,9 +9,9 @@ $url = 'https://lock.ufunnetwork.com/ilocks/api/apps/v1/servers/accesstoken';
 $params = array(
     'password' => '445566',       //ENTER THE SERVER PASSWORD HERE 445566
     'device_mac' => '',
-    'username' => 'kas-server',    //ENTER THE SERVER USERNAME HERE kas-server
-    'callback_address' => 'http://localhost:8888/kas-server/api/app/callbackKeySharingRequest.php',    //ENTER THE SERVER USERNAME HERE kas-server
-    'keeper_accounts' => ['lock-264-7'],    //ENTER THE SERVER USERNAME HERE kas-server
+    'username' => 'kas-server'    //ENTER THE SERVER USERNAME HERE kas-server
+    // 'callback_address' => 'http://onlinetool.kas.com.au/api/app/callbackKeySharingRequest.php',  
+    // 'keeper_accounts' => ['lock-264-7'],    
 );
 
 $responseJson = CallAPIAuth("POST", $url, $params);
@@ -19,9 +19,9 @@ echo $responseJson;
 
 
 $response = json_decode($responseJson);
-echo "<br>-- <br>access_token: ";
+echo "<br>-- <br>access_token: ";       //3 HOURS 
 echo $response->access_token;
-echo "<br>refresh_token: ";
+echo "<br>refresh_token: ";             //7 DAYS (Target every 5 days to fresh token)
 echo $response->refresh_token;
 echo "<br><br><br>";
 
