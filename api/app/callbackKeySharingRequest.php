@@ -93,14 +93,14 @@ foreach ($result['keys'] as $qty => $keyArray) {
 
 if ($result == 0) {
 
-    $sid = 'ACef4f533e120249f8e0e5e75f33c17f2b';
-    $token = '043ed086f4665ac2d04223e62f61eef4';
+    $sid = '';
+    $token = '';
     $client = new Client($sid, $token);
 
     $client->messages->create(
     $target_mobile,
     array(
-        'from' => '+61428475906',
+        'from' => '+',
         'body' => 'You have received a mobile key! 
 
 Download the KAS Mobile Access app and enter this passcode to retreive your key. 
